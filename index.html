@@ -10,8 +10,6 @@
 <body>
     <div class="container">
         <h1>GroupVibe</h1>
-        
-        <!-- ส่วนล็อกอิน -->
         <div id="login-section" class="login-section">
             <div class="login-box">
                 <h2>เริ่มสนุกกับงานกลุ่ม!</h2>
@@ -22,65 +20,56 @@
                 <p id="user-info"></p>
             </div>
         </div>
-
-        <!-- ส่วนหลัก -->
-        <div id="main-content" style="display: none;">
-            <!-- ปุ่มโปรไฟล์ -->
-            <div class="profile-btn" onclick="toggleProfile()">
-                <img id="profile-pic" src="" alt="Profile" class="profile-pic">
-            </div>
-
-            <!-- โปรไฟล์ป๊อปอัป -->
-            <div id="profile-modal" class="profile-modal" style="display: none;">
-                <div class="profile-content">
-                    <span class="close-profile" onclick="toggleProfile()">✖</span>
-                    <img id="modal-profile-pic" src="" alt="Profile" class="modal-profile-pic">
-                    <h3 id="profile-name"></h3>
-                    <p id="profile-status"></p>
-                    <input type="text" id="status-input" placeholder="ตั้งสถานะของคุณ...">
-                    <button onclick="updateStatus()">อัปเดตสถานะ</button>
-                </div>
-            </div>
-
-            <!-- บอร์ดไอเดีย -->
-            <div class="idea-board">
-                <h2>💡 บอร์ดไอเดีย</h2>
-                <div id="ideas" class="ideas-list"></div>
-                <div class="input-group">
-                    <input type="text" id="idea-input" placeholder="ไอเดียเจ๋ง ๆ ของนายคือ...">
-                    <button onclick="addIdea()">เพิ่มเลย!</button>
-                </div>
-            </div>
-
-            <!-- แชท -->
-            <div class="chat-box">
-                <h2>💬 แชทกลุ่ม</h2>
-                <div id="chat" class="chat-messages"></div>
-                <div class="input-group">
-                    <input type="text" id="chat-input" placeholder="พิมพ์อะไรก็ได้...">
-                    <button onclick="sendMessage()">ส่ง!</button>
-                </div>
-            </div>
-        </div>
+        <div id="nav-bar" style="display: none;"></div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-storage-compat.js"></script>
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyABVE8SqX0EkXEVZMaCXTq-dFFXCNTKkm8",
             authDomain: "groupvibe-d5bd5.firebaseapp.com",
             projectId: "groupvibe-d5bd5",
-            storageBucket: "groupvibe-d5bd5.firebasestorage.app",
+            storageBucket: "groupvibe-d5bd5.appspot.com",
             messagingSenderId: "920127227376",
             appId: "1:920127227376:web:2a97863bd2ac6336234935"
         };
+    
         firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+        window.auth = firebase.auth();
+        window.db = firebase.firestore();
+        window.storage = firebase.storage();
+    
+        auth.onAuthStateChanged((user) => {
+            const loginSection = document.getElementById('login-section');
+            const navBar = document.getElementById('nav-bar');
+            const userInfo = document.getElementById('user-info');
+    
+            if (user) {
+                loginSection.style.display = 'none';
+                navBar.style.display = 'flex';
+                userInfo.textContent = `สวัสดี ${user.displayName}!`;
+                window.location.href = 'feed.html';
+            } else {
+                loginSection.style.display = 'flex';
+                navBar.style.display = 'none';
+                userInfo.textContent = '';
+            }
+        });
+    
+        const provider = new firebase.auth.GoogleAuthProvider();
+        document.getElementById('login-btn').addEventListener('click', () => {
+            auth.signInWithPopup(provider)
+                .then((result) => {
+                    console.log("ล็อกอินสำเร็จ:", result.user);
+                })
+                .catch((error) => {
+                    console.error("ล็อกอินล้มเหลว:", error.code, error.message);
+                    alert("ล็อกอินล้มเหลว: " + error.message);
+                });
+        });
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
