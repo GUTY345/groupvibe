@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GroupVibe - แชท</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h1>GroupVibe</h1>
+            <ul class="nav-list">
+                <li><a href="feed.html"><i class="fas fa-home"></i> <span>ฟีด</span></a></li>
+                <li><a href="chat.html" class="active"><i class="fas fa-comments"></i> <span>แชท</span></a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> <span>โปรไฟล์</span></a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> <span>การตั้งค่า</span></a></li>
+            </ul>
+            <button id="theme-toggle"><i class="fas fa-adjust"></i> เปลี่ยนธีม</button>
+            <button onclick="signOut()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</button>
+        </nav>
+
+        <!-- Bottom Navigation for Mobile -->
+        <nav class="bottom-nav">
+            <ul class="nav-list">
+                <li><a href="feed.html"><i class="fas fa-home"></i> <span>ฟีด</span></a></li>
+                <li><a href="chat.html" class="active"><i class="fas fa-comments"></i> <span>แชท</span></a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> <span>โปรไฟล์</span></a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> <span>การตั้งค่า</span></a></li>
+                <li class="more-menu">
+                    <a href="#" onclick="toggleMoreMenu(event)"><i class="fas fa-ellipsis-h"></i> <span>เพิ่มเติม</span></a>
+                    <div class="more-menu-content">
+                        <button id="theme-toggle-mobile"><i class="fas fa-adjust"></i> เปลี่ยนธีม</button>
+                        <button onclick="signOut()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="chat-page">
+                <div class="chat-sidebar">
+                    <div class="chat-sidebar-header">
+                        <h2>แชท</h2>
+                        <button onclick="openGroupModal()" class="new-chat-btn"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <div id="group-list" class="chat-list"></div>
+                    <h3>แชทส่วนตัว</h3>
+                    <div id="private-chat-list" class="chat-list"></div>
+                </div>
+                <div class="chat-main">
+                    <div class="chat-header">
+                        <h2 id="chat-title">💬 เลือกแชท</h2>
+                    </div>
+                    <div id="chat" class="chat-messages"></div>
+                    <div class="input-group">
+                        <input type="text" id="chat-input" placeholder="พิมพ์ข้อความ...">
+                        <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Group Modal -->
+        <div id="group-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeGroupModal()">×</span>
+                <h2>สร้างกลุ่มใหม่</h2>
+                <input type="text" id="group-name-input" placeholder="ชื่อกลุ่ม...">
+                <button onclick="createGroup()">สร้าง</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-storage-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

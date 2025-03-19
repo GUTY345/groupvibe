@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GroupVibe - ฟีด</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h1>GroupVibe</h1>
+            <ul class="nav-list">
+                <li><a href="feed.html" class="active"><i class="fas fa-home"></i> <span>ฟีด</span></a></li>
+                <li><a href="chat.html"><i class="fas fa-comments"></i> <span>แชท</span></a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> <span>โปรไฟล์</span></a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> <span>การตั้งค่า</span></a></li>
+            </ul>
+            <button id="theme-toggle"><i class="fas fa-adjust"></i> เปลี่ยนธีม</button>
+            <button onclick="signOut()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</button>
+        </nav>
+
+        <!-- Bottom Navigation for Mobile -->
+        <nav class="bottom-nav">
+            <ul class="nav-list">
+                <li><a href="feed.html" class="active"><i class="fas fa-home"></i></a></li>
+                <li><a href="chat.html"><i class="fas fa-comments"></i></a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i></a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i></a></li>
+                <li class="more-menu">
+                    <a href="#" onclick="toggleMoreMenu(event)"><i class="fas fa-ellipsis-h"></i></a>
+                    <div class="more-menu-content">
+                        <button id="theme-toggle-mobile"><i class="fas fa-adjust"></i> เปลี่ยนธีม</button>
+                        <button onclick="signOut()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="feed">
+
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <input type="text" id="search-input" placeholder="ค้นหาเพื่อนหรือโพสต์...">
+                    <button onclick="searchFeed()"><i class="fas fa-search"></i></button>
+                </div>
+
+                <!-- Post Button -->
+                <div class="post-button">
+                    <button onclick="openPostModal()">ไอเดียใหม่</button>
+                </div>
+
+                <!-- Posts -->
+                <div id="posts" class="posts-list"></div>
+            </div>
+        </div>
+
+        <!-- Post Modal -->
+        <div id="post-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closePostModal()">×</span>
+                <h2>แชร์ไอเดียของคุณเลย</h2>
+                <textarea id="modal-post-input" placeholder="แชร์อะไรดี..."></textarea>
+                <input type="file" id="modal-post-file" accept="image/*">
+                <button onclick="submitPost()">โพสต์</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-storage-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

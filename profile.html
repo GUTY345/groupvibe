@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GroupVibe - โปรไฟล์</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h1>GroupVibe</h1>
+            <ul class="nav-list">
+                <li><a href="feed.html"><i class="fas fa-home"></i> <span>ฟีด</span></a></li>
+                <li><a href="chat.html"><i class="fas fa-comments"></i> <span>แชท</span></a></li>
+                <li><a href="profile.html" class="active"><i class="fas fa-user"></i> <span>โปรไฟล์</span></a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> <span>การตั้งค่า</span></a></li>
+            </ul>
+            <button id="theme-toggle"><i class="fas fa-adjust"></i> เปลี่ยนธีม</button>
+            <button onclick="signOut()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</button>
+        </nav>
+
+        <!-- Bottom Navigation for Mobile -->
+        <nav class="bottom-nav">
+            <ul class="nav-list">
+                <li><a href="feed.html"><i class="fas fa-home"></i> <span>ฟีด</span></a></li>
+                <li><a href="chat.html"><i class="fas fa-comments"></i> <span>แชท</span></a></li>
+                <li><a href="profile.html" class="active"><i class="fas fa-user"></i> <span>โปรไฟล์</span></a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> <span>การตั้งค่า</span></a></li>
+                <li class="more-menu">
+                    <a href="#" onclick="toggleMoreMenu(event)"><i class="fas fa-ellipsis-h"></i> <span>เพิ่มเติม</span></a>
+                    <div class="more-menu-content">
+                        <button id="theme-toggle-mobile"><i class="fas fa-adjust"></i> เปลี่ยนธีม</button>
+                        <button onclick="signOut()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="profile-page">
+                <div class="profile-header">
+                    <img id="profile-pic" src="" alt="Profile" class="profile-pic">
+                    <div class="profile-stats">
+                        <div>
+                            <span id="posts-count">0</span>
+                            <p>โพสต์</p>
+                        </div>
+                        <div>
+                            <span id="followers-count">0</span>
+                            <p>ผู้ติดตาม</p>
+                        </div>
+                        <div>
+                            <span id="following-count">0</span>
+                            <p>กำลังติดตาม</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <h3 id="profile-name"></h3>
+                    <p id="profile-status"></p>
+                </div>
+                <div class="profile-actions" id="profile-actions">
+                    <button onclick="updateProfile()" id="edit-profile-btn">แก้ไขโปรไฟล์</button>
+                </div>
+                <div class="profile-posts">
+                    <h2>โพสต์</h2>
+                    <div id="user-posts" class="posts-list"></div>
+                </div>
+                <h2>เพิ่มเพื่อน</h2>
+                <input type="text" id="friend-search" placeholder="ค้นหาด้วยชื่อ...">
+                <button onclick="searchUsers()">ค้นหา</button>
+                <div id="search-results" class="search-results"></div>
+                <h2>เพื่อนของฉัน</h2>
+                <div id="friends-list" class="friends-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-storage-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

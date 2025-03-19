@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GroupVibe - การตั้งค่า</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h1>GroupVibe</h1>
+            <ul class="nav-list">
+                <li><a href="feed.html"><i class="fas fa-home"></i> <span>ฟีด</span></a></li>
+                <li><a href="chat.html"><i class="fas fa-comments"></i> <span>แชท</span></a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> <span>โปรไฟล์</span></a></li>
+                <li><a href="settings.html" class="active"><i class="fas fa-cog"></i> <span>การตั้งค่า</span></a></li>
+            </ul>
+            <button id="theme-toggle"><i class="fas fa-adjust"></i> เปลี่ยนธีม</button>
+            <button onclick="signOut()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</button>
+        </nav>
+
+        <!-- Bottom Navigation for Mobile -->
+        <nav class="bottom-nav">
+            <ul class="nav-list">
+                <li><a href="feed.html"><i class="fas fa-home"></i> <span>ฟีด</span></a></li>
+                <li><a href="chat.html"><i class="fas fa-comments"></i> <span>แชท</span></a></li>
+                <li><a href="profile.html"><i class="fas fa-user"></i> <span>โปรไฟล์</span></a></li>
+                <li><a href="settings.html" class="active"><i class="fas fa-cog"></i> <span>การตั้งค่า</span></a></li>
+                <li class="more-menu">
+                    <a href="#" onclick="toggleMoreMenu(event)"><i class="fas fa-ellipsis-h"></i> <span>เพิ่มเติม</span></a>
+                    <div class="more-menu-content">
+                        <button id="theme-toggle-mobile"><i class="fas fa-adjust"></i> เปลี่ยนธีม</button>
+                        <button onclick="signOut()"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</button>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="settings-page">
+                <h2>การตั้งค่า</h2>
+                <div class="settings-item">
+                    <label>เปลี่ยนชื่อโปรไฟล์</label>
+                    <input type="text" id="new-display-name" placeholder="ชื่อใหม่...">
+                    <button onclick="changeDisplayName()">บันทึก</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-storage-compat.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
