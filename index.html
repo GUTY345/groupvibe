@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GroupVibe - สนุกไปกับงานกลุ่ม!</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>GroupVibe</h1>
+        
+        <!-- ส่วนล็อกอิน -->
+        <div id="login-section" class="login-section">
+            <div class="login-box">
+                <h2>เริ่มสนุกกับงานกลุ่ม!</h2>
+                <button id="login-btn" class="google-btn">
+                    <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google">
+                    ล็อกอินด้วย Google
+                </button>
+                <p id="user-info"></p>
+            </div>
+        </div>
+
+        <!-- ส่วนหลัก -->
+        <div id="main-content" style="display: none;">
+            <!-- ปุ่มโปรไฟล์ -->
+            <div class="profile-btn" onclick="toggleProfile()">
+                <img id="profile-pic" src="" alt="Profile" class="profile-pic">
+            </div>
+
+            <!-- โปรไฟล์ป๊อปอัป -->
+            <div id="profile-modal" class="profile-modal" style="display: none;">
+                <div class="profile-content">
+                    <span class="close-profile" onclick="toggleProfile()">✖</span>
+                    <img id="modal-profile-pic" src="" alt="Profile" class="modal-profile-pic">
+                    <h3 id="profile-name"></h3>
+                    <p id="profile-status"></p>
+                    <input type="text" id="status-input" placeholder="ตั้งสถานะของคุณ...">
+                    <button onclick="updateStatus()">อัปเดตสถานะ</button>
+                </div>
+            </div>
+
+            <!-- บอร์ดไอเดีย -->
+            <div class="idea-board">
+                <h2>💡 บอร์ดไอเดีย</h2>
+                <div id="ideas" class="ideas-list"></div>
+                <div class="input-group">
+                    <input type="text" id="idea-input" placeholder="ไอเดียเจ๋ง ๆ ของนายคือ...">
+                    <button onclick="addIdea()">เพิ่มเลย!</button>
+                </div>
+            </div>
+
+            <!-- แชท -->
+            <div class="chat-box">
+                <h2>💬 แชทกลุ่ม</h2>
+                <div id="chat" class="chat-messages"></div>
+                <div class="input-group">
+                    <input type="text" id="chat-input" placeholder="พิมพ์อะไรก็ได้...">
+                    <button onclick="sendMessage()">ส่ง!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
